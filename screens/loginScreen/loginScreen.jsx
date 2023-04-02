@@ -6,7 +6,6 @@ import {
     Text,
     Keyboard,
     KeyboardAvoidingView,
-    Platform,
     TouchableWithoutFeedback,
 } from 'react-native';
 import { Input } from "../../components/input/input";
@@ -51,7 +50,7 @@ useEffect(() => {
                 <SafeAreaView
                     style={styles.container}
                 >
-                <KeyboardAvoidingView style={styles.formwWapper} behavior="padding">
+                <KeyboardAvoidingView style={styles.formwWapper}>
                     <View style={styles.inputWrapper}> 
                         <Text style={styles.title}>Sign in</Text>
                         <Input
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
         lineHeight: 35,
         textAlign: 'center',
         marginBottom: 32,
-        marginTop: 92,
+        marginTop: 32,
     },
     formwWapper: {
         marginBottom: 32
@@ -115,6 +114,6 @@ const styles = StyleSheet.create({
         color: '#1B4371',
         textAlign: 'center',
         marginTop: 16,
-        marginBottom: 45
+        marginBottom: 111
     }
 });
