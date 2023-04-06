@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
     SafeAreaView,
     StyleSheet,
@@ -7,16 +8,24 @@ import {
     Keyboard,
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
+    ImageBackground,
+    TouchableOpacity,
 } from 'react-native';
 import { Input } from "../../components/input/input";
 import { Button } from '../../components/button/button';
-
+import primaryBG from '../../images/primaryBG.webp';
 
 export const LoginScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [keyboardIsVisible, setKeyboardIsVisible] = useState(false);
-    
+    const navigation = useNavigation();
+
+  function handlePress() {
+    navigation.navigate('SignUp');
+  }
+
+
 
 useEffect(() => {
     Keyboard.addListener('keyboardDidShow', () => {
@@ -37,20 +46,21 @@ useEffect(() => {
     if (email && password) {
         alert('Response successful')
         console.log(`Email: ${email}\nPassword: ${password}`);
+        navigation.navigate('Home')
     } else {
       alert('Please enter all fields');
     }
   };
 
-
     return (
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
         >
+            <ImageBackground source={primaryBG} style={styles.image}>
                 <SafeAreaView
                     style={styles.container}
                 >
-                <KeyboardAvoidingView style={styles.formwWapper}>
+                    <KeyboardAvoidingView style={styles.formwWapper}>
                     <View style={styles.inputWrapper}> 
                         <Text style={styles.title}>Sign in</Text>
                         <Input
@@ -67,21 +77,28 @@ useEffect(() => {
                         {!keyboardIsVisible && <View style={styles.buttonWrapper}>
                             <Button
                                 onPress={handleSubmit}
-                                title='Register'
-                            />
-                            <Text style={styles.subTitle}>Don't have an account?</Text>
+                                title='Sign in'
+                            >
+                                <Text>Sign In</Text>
+                            </Button>
+                            <TouchableOpacity onPress={handlePress}>
+                                <Text style={styles.subTitle}>Don't have an account? Sign Up</Text>
+                            </TouchableOpacity>
                         </View>
                         }
                     </KeyboardAvoidingView>
                 </SafeAreaView>
+            </ImageBackground>
         </TouchableWithoutFeedback>
     )
 };
 
+
+
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
-        marginTop: 'auto',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         borderBottomLeftRadius: 0,
@@ -89,7 +106,6 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#212121',
-        fontWeight: 500,
         fontSize: 30,
         lineHeight: 35,
         textAlign: 'center',
@@ -114,6 +130,11 @@ const styles = StyleSheet.create({
         color: '#1B4371',
         textAlign: 'center',
         marginTop: 16,
-        marginBottom: 111
-    }
+    },
+    image: {
+        flex: 1,
+        resizeMode: 'cover',
+        width: '100%',
+        justifyContent: 'flex-end'
+  },
 });

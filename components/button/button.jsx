@@ -1,6 +1,5 @@
-import {StyleSheet, TouchableOpacity, Text } from 'react-native'
-
-export const Button = ({ onPress, title }) => {
+import {StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
+export const Button = ({ onPress, title}) => {
     return (
         <>
             <TouchableOpacity
@@ -21,13 +20,12 @@ const styles = StyleSheet.create({
         paddingRight: 32,
         paddingLeft:32,
         borderRadius: 100,
-        width: '100%',
         height: 50,
         alignItems: 'center',
+        justifyContent: 'center'
     },
     buttonTitle: {
         color: '#FFFFFF',
         fontSize: 16,
-        fontWeight: 400
-    }
+    },
 });

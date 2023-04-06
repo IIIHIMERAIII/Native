@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
     SafeAreaView,
     StyleSheet,
@@ -6,18 +7,26 @@ import {
     Text,
     Keyboard,
     KeyboardAvoidingView,
-    Platform,
+    ImageBackground,
     TouchableWithoutFeedback,
+    TouchableOpacity,
 } from 'react-native';
 import { Input } from "../../components/input/input";
 import { Button } from '../../components/button/button';
+import { Avatar } from '../../components/avatar/avatar';
+import primaryBG from '../../images/primaryBG.webp';
 
 export const RegistrationScreen = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [keyboardIsVisible, setKeyboardIsVisible] = useState(false);
-    
+    const navigation = useNavigation();
+
+  function handlePress() {
+    navigation.navigate('SignIn');
+  }
+
 
 useEffect(() => {
     Keyboard.addListener('keyboardDidShow', () => {
@@ -38,6 +47,7 @@ useEffect(() => {
     if (name && email && password) {
         alert('Registration successful')
         console.log(`Name: ${name}\nEmail: ${email}\nPassword: ${password}`);
+        navigation.navigate('Home')
     } else {
       alert('Please enter all fields');
     }
@@ -46,11 +56,13 @@ useEffect(() => {
 
     return (
         <TouchableWithoutFeedback
-            onPress={Keyboard.dismiss}
-        >
+                onPress={Keyboard.dismiss}
+            >
+                <ImageBackground source={primaryBG} style={styles.image}>
                 <SafeAreaView
                     style={styles.container}
-                >
+                    >
+                <Avatar/>
                 <KeyboardAvoidingView style={styles.formwWapper} behavior="padding">
                     <View style={styles.inputWrapper}> 
                         <Text style={styles.title}>Registration</Text>
@@ -75,11 +87,14 @@ useEffect(() => {
                                 onPress={handleSubmit}
                                 title='Register'
                             />
-                            <Text style={styles.subTitle}>Already have an account?</Text>
+                            <TouchableOpacity onPress={handlePress}>
+                                <Text style={styles.subTitle}>Already have an account? Sign in</Text>
+                            </TouchableOpacity>
                         </View>
                         }
                     </KeyboardAvoidingView>
-                </SafeAreaView>
+                    </SafeAreaView>
+                </ImageBackground>
         </TouchableWithoutFeedback>
     )
 };
@@ -87,23 +102,24 @@ useEffect(() => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
-        marginTop: 'auto',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
+        alignItems: 'center',
+
     },
     title: {
         color: '#212121',
-        fontWeight: 500,
         fontSize: 30,
         lineHeight: 35,
         textAlign: 'center',
-        marginBottom: 32,
-        marginTop: 92,
+        marginBottom: 25,
+        marginTop: 75
     },
     formwWapper: {
-        marginBottom: 32
+        marginBottom: 10,
+        width: '100%'
     },
     inputWrapper: {
         gap: 16,
@@ -111,7 +127,7 @@ const styles = StyleSheet.create({
         paddingRight:16
     },
     buttonWrapper: {
-        marginTop: 43,
+        marginTop: 40,
         paddingLeft: 16,
         paddingRight:16
     },
@@ -120,6 +136,11 @@ const styles = StyleSheet.create({
         color: '#1B4371',
         textAlign: 'center',
         marginTop: 16,
-        marginBottom: 45
-    }
+    },
+    image: {
+        flex: 1,
+        resizeMode: 'cover',
+        width: '100%',
+        justifyContent: 'flex-end'
+  },
 });
