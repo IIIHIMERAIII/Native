@@ -4,7 +4,6 @@ import {
     Text,
     Image,
 } from 'react-native';
-import defaultIMG from '../../images/defaultImg.png'
 import { AddIMGButton } from '../addIMGButton/addIMGButton';
 import { AddPostForm } from '../addPostForm/addPostForm';
 import { Button } from '../button/button';
@@ -14,14 +13,10 @@ export const PostCreater = () => {
     return (
     <View style={styles.container}>
         <View style={styles.imageContainer}>
-                <Image source={defaultIMG} />
                 <AddIMGButton />
                 <Text style={styles.unploadTitle}>Upload photo</Text>
         </View>
             <AddPostForm />
-            <Button
-                title='Publish'
-            />
     </View>
   )
 };
@@ -29,6 +24,7 @@ export const PostCreater = () => {
 const styles = StyleSheet.create({
     container: {
         marginTop: 32,
+        alignItems: 'center'
     },
     imageContainer: {
         position: 'relative',

@@ -2,9 +2,12 @@ import {
     View,
     StyleSheet,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { GalleryItem } from '../../components/galleryItem/galleryItem';
+
 
 export const PostsScreen = () => {
   const navigation = useNavigation();
@@ -21,13 +24,24 @@ export const PostsScreen = () => {
                     <View style={styles.user} />
                   </TouchableOpacity>
                   <Text style={styles.userInfo}>Some User{'\n'}SomeEmail@gmail.com</Text>
-            </View>
-        </View>
+              </View>
+              <ScrollView
+                    style={styles.galleryWrapper}
+                    >
+                < GalleryItem />
+                < GalleryItem />
+                < GalleryItem />
+              </ScrollView>
+          </View>
       </View>
     )
 };
 
 const styles = StyleSheet.create({
+  galleryWrapper: {
+    paddingLeft: 16,
+    paddingRight: 16,
+    },
   container: {
     flex: 1,
     backgroundColor: 'white',

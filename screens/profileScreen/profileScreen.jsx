@@ -4,7 +4,6 @@ import {
     Text,
     KeyboardAvoidingView,
     ImageBackground,
-    Image,
     ScrollView
 } from 'react-native';
 import { Avatar } from '../../components/avatar/avatar';
@@ -28,7 +27,7 @@ export const ProfileScreen = () => {
                         <GalleryItem/>
                     </ScrollView>
                     </KeyboardAvoidingView>
-                    </SafeAreaView>
+                </SafeAreaView>
             </ImageBackground>
     )
 };
@@ -42,7 +41,6 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 0,
         alignItems: 'center',
         marginTop: 200
-
     },
     title: {
         color: '#212121',
